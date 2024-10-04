@@ -1,6 +1,6 @@
 // TASK: import helper functions from utils
 // TASK: import initialData
-import { getTasks, createNewTask, patchTask, putTask, deleteTask } from "./utils/taskFunctions.js";
+import { getTasks, createNewTask, putTask, deleteTask } from "./utils/taskFunctions.js";
 import { initialData } from "./initialData.js";
 
 
@@ -58,7 +58,7 @@ function fetchAndDisplayBoardsAndTasks() {
   displayBoards(boards);
   if (boards.length > 0) {
     const localStorageBoard = localStorage.getItem("activeBoard")
-    activeBoard = localStorageBoard ? JSON.parse(localStorageBoard) :  boards[0]; 
+    activeBoard = localStorageBoard ? JSON.parse(localStorageBoard) : boards[0]; 
     elements.headerBoardName.textContent = activeBoard
     styleActiveBoard(activeBoard)
     refreshTasksUI();
@@ -105,14 +105,12 @@ function filterAndDisplayTasksByBoard(boardName) {
     tasksContainer.classList.add('tasks-container')
     column.appendChild(tasksContainer);
     
-    
     filteredTasks.filter(task => task.status === status).forEach(task => { 
       const taskElement = document.createElement("div");
       taskElement.classList.add("task-div");
       taskElement.textContent = task.title;
       taskElement.setAttribute('data-task-id', task.id);
-      
-
+    
       // Listen for a click event on each task and open a modal
       taskElement.addEventListener('click', (event) => { 
         openEditTaskModal(task);
@@ -291,7 +289,7 @@ function saveTaskChanges(taskId) {
 
   // Close the modal and refresh the UI to reflect the changes
   toggleModal(false, elements.editTaskModal)
-  refreshTasksUI();
+  refreshTasksUI(); //reflect new changes
 }
 
 /*************************************************************************************************************************************************/
